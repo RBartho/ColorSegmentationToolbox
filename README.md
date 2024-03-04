@@ -4,10 +4,6 @@ This project contains Python scripts to run a streamlit application "ColorSegmen
 
 # Installation instructions
 
-Download all the files from this GitHub repository to your computer. (Download the ZIP file under the green "Code" button.) Then follow the installation instructions for your operating system:
-
-# Installation instructions
-
 1. If you do not already have Anaconda or Miniconda installed, download and install Anaconda for your operating system (use the default install options):
 
 	https://www.anaconda.com/download
