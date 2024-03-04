@@ -40,12 +40,8 @@ python -m streamlit run Segmentation.py
 ```
 
 Your default browser should open the application on your local machine. It should look like this: 
-![Screenshot](https://github.com/RBartho/SIPmachine/tree/main/images/toolbox_screenshot.png)
+![Screenshot](https://github.com/RBartho/ColorSegmentationToolbox/tree/main/images/toolbox_screenshot.png)
 The browser is only used as an interface. No data is uploaded to the Internet.
-
-![back](https://github.com/RBartho/SIPmachine)
-
-
 
 # Starting the application (after installation)
 
