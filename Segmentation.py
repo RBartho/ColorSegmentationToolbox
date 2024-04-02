@@ -112,12 +112,11 @@ if app_mode == 'Segmentation':
         list_of_images = []
         for root, dirs, files in os.walk(selected_img_path):
             for file in files:
-                if ('.jpg' in file) or ('.jpeg' in file) or ('.png' in file) or ('.tif' in file) or ('.TIF' in file) or ('.TIFF' in file) or ('.tiff' in file): 
+                if ('.jpg' in file) or ('.JPG' in file) or ('.jpeg' in file)  or ('.JPEG' in file) or ('.png' in file) or ('.PNG' in file) or ('.tif' in file) or ('.TIF' in file) or ('.TIFF' in file) or ('.tiff' in file): 
                     list_of_images.append(os.path.join(  root , file))
         st.session_state.list_of_images = list_of_images
     
     
-
     lower_bound = st.session_state.get("lower_bound", (144, 27, 0))
     upper_bound = st.session_state.get("upper_bound", (179, 179, 179))
     display_imgs = st.session_state.get("display_imgs", None)
