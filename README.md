@@ -73,5 +73,5 @@ python -m streamlit run Segmentation.py
 All calculations and data transfers of the application take place on your local computer. The browser is only used as an interface. No data is uploaded to the Internet.
 
 # Contributers
-Ralf Bartho: Toolbox concept, code development, maintenance, bugfixes <\br>
+Ralf Bartho: Toolbox concept, code development, maintenance, bugfixes <br />
 Hanna Maar: Toolbox concept, beta testing
