@@ -1,4 +1,4 @@
-# ColorSegmentationToolbox - can be used to segment colored Tumor cells
+# Color Segmentation Toolbox - can be used to segment colored Tumor cells
 
 This project contains Python scripts to run a streamlit application "ColorSegmentationToolbox" in your browser. It offers a browser based GUI to segment Hue colors with different Saturations in images.
 
