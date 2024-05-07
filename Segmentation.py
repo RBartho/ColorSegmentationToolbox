@@ -248,18 +248,15 @@ if run:
         with ZipFile(zip_file_bytes_io, 'w') as zip_file:
             for image_name, bytes_stream in images:
                 zip_file.writestr(image_name+".png", bytes_stream.getvalue())
-                
-            
-        st.session_state.comp_finished = True
+            zip_file.writestr(csv_name, result_csv)
               
     else:
         st.write('No image files found. Load images first.')
 
     
-if st.session_state.comp_finished:
+if run and upload_file:
     st.success('Calculations finished. A csv-file has been created in your selected results folder.', icon="✅")
-    download = st.download_button('Download Results csv', result_csv, file_name=csv_name)  # Defaults to 'text/plain'
-    download = st.download_button('Download segmented images', zip_file_bytes_io, file_name='segmented_imgs.zip')  # Defaults to 'text/plain'
+    download = st.download_button('Download resusegmented images', zip_file_bytes_io, file_name='segmented_imgs_and_results.zip')  # Defaults to 'text/plain'
     
   
 
