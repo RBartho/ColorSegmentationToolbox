@@ -256,7 +256,7 @@ if run:
     
 if run and upload_file:
     st.success('Calculations finished. A csv-file has been created in your selected results folder.', icon="✅")
-    download = st.download_button('Download resusegmented images', zip_file_bytes_io, file_name='segmented_imgs_and_results.zip')  # Defaults to 'text/plain'
+    download = st.download_button('Download segmented images', zip_file_bytes_io, file_name='segmented_imgs_and_results.zip')  # Defaults to 'text/plain'
     
   
 
