@@ -4,4 +4,4 @@ numpy
 streamlit
 Pillow
 scikit-image
-zipfile
+
