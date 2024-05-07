@@ -4,5 +4,4 @@ numpy
 streamlit
 Pillow
 scikit-image
-scipy
-opencv
+zipfile
