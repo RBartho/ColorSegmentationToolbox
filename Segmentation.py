@@ -26,10 +26,6 @@ def segment_img(img_rgb, lower_bound, upper_bound):
     return hsv_img, num_tumor_pixel, np.round(perc, decimals=2)
 
 
-def callback_upload_img_files():
-    st.session_state.new_files_uploaded = True
-
-
 def file_process_in_memory(images):
     """ Converts PIL image objects into BytesIO in-memory bytes buffers. """
 
@@ -99,20 +95,8 @@ height: auto;
     unsafe_allow_html=True,
 )
 
-upload_file = st.file_uploader('Load image files', type=['jpg','jpeg','png','tif'], accept_multiple_files=True, label_visibility="collapsed", on_change=callback_upload_img_files )# Check to see if a  file has been uploaded
+upload_file = st.file_uploader('Load image files', type=['jpg','jpeg','png','tif'], accept_multiple_files=True, label_visibility="collapsed" )
  
-  
-if st.session_state.get('new_files_uploaded' , False): # check if upload files have been changed, and only then do checks again
-    st.session_state.upload_files = upload_file
-    # check for commas and large files
-    st.session_state.commas = False
-    for file in upload_file:
-        if ',' in file.name:
-            st.session_state.commas = True
-        if sys.getsizeof(file) > 6e+6:
-            st.session_state.large_files = True
-    st.session_state.new_files_uploaded = False
-    
 
 
 
