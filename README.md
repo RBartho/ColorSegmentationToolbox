@@ -2,7 +2,13 @@
 
 This project contains Python scripts to run a streamlit application "ColorSegmentationToolbox" in your browser. It offers a browser based GUI to segment Hue colors with different Saturations in images.
 
-# Installation instructions
+# Cloud Version
+
+You can use the toolbox in the streamlit community cloud: https://colorsegmentationtoolbox.streamlit.app/
+
+
+# Instructions for local installation 
+If you do not want to use the cloud version, you can install the Toolbox locally on your computer:
 
 1. If you do not already have Anaconda or Miniconda installed, download and install Anaconda for your operating system (use the default install options):
 
