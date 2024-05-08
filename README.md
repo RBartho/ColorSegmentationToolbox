@@ -73,10 +73,7 @@ python -m streamlit run Segmentation.py
 
 4. Multithreading is not supported as it would limit platform independence. To speed up calculations, you may want to consider splitting the data and running multiple instances of the application.
 
-5. The number of images you can load into the application at one time is limited by your hard-drive. Also note, large images require much more processing time than smaller images.
-
-# Privacy and security
-All calculations and data transfers of the application take place on your local computer. The browser is only used as an interface. No data is uploaded to the Internet.
+5. The number of images you can load into the application at one time is limited by your local RAM or the streamlit community cloud. Also note that large images require much more processing time than smaller images.
 
 # Contributers
 Ralf Bartho: Toolbox concept, code development, maintenance, bugfixes <br />
