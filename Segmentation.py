@@ -9,7 +9,6 @@ import io
 from zipfile import ZipFile
 
 
-
 Image.MAX_IMAGE_PIXELS = 1e12
 			      
        
@@ -56,9 +55,9 @@ st.markdown(
    
 
 
-
+### Define custom markdowns
 st.markdown(""" <style> .font0 {
-font-size:35px ; font-family: 'Cooper Black'; color: black;} 
+font-size:28px ; font-family: 'Cooper Black'; color: black;} 
 </style> """, unsafe_allow_html=True)
 
 st.markdown(""" <style> .font1 {
@@ -66,16 +65,24 @@ font-size:20px ; font-family: 'Cooper Black'; color: black;}
 </style> """, unsafe_allow_html=True)
 
 st.markdown(""" <style> .font2 {
-font-size:20px ; font-family: 'Cooper Black'; color: green;} 
+font-size:35px ;  font-family: 'Cooper Black'; color: #FF9633;}
 </style> """, unsafe_allow_html=True)
 
+st.markdown(""" <style> .font2 {
+font-size:35px ;  font-family: 'Cooper Black'; color: #FF9633;}
+</style> """, unsafe_allow_html=True)
+
+
+st.markdown(""" <style> .fontgreen {
+font-size:20px ; font-family: 'Cooper Black'; color: green;} 
+</style> """, unsafe_allow_html=True)
 
 image1 = Image.open('images/logo_ukj.png')
 
 #Create two columns with different width
 col1, col2 = st.columns( [0.7, 0.3])
 with col1:               # To display the header text using css style
-    st.markdown('<p class="font0">Image Color Segmentation</p>', unsafe_allow_html=True)
+    st.markdown('<p class="font2">Image Color Segmentation</p>', unsafe_allow_html=True)
     st.markdown('<p class="font1">This is a streamlit app to segment colors in images</p>', unsafe_allow_html=True)
 with col2:               # To display brand logo
     st.image(image1,  width=200) 
@@ -105,9 +112,13 @@ upper_bound = st.session_state.get("upper_bound", (179, 179, 179))
 display_imgs = st.session_state.get("display_imgs", None)
 img_rgb = st.session_state.get("img_rgb", np.array([0]))
 
+st.divider()
+
 if upload_file:
     
-    st.write("Select bounds for Segmentation:")
+    # st.write("Select bounds for Segmentation:")
+    st.markdown('<p class="fontgreen">Select bounds for Segmentation:</p>', unsafe_allow_html=True)
+    
     c1l, c2l, c3l = st.columns( [0.3, 0.3, 0.3])
     with c1l:
         Hue_l = st.slider('Hue lower bound:', 0, 179, 144)
@@ -120,12 +131,14 @@ if upload_file:
     c1u, c2u, c3u = st.columns( [0.3, 0.3, 0.3])
     with c1u:
         Hue_u = st.slider('Hue upper bound:', 0, 179, 179)
-        #st.image('/home/ralf/Documents/21_segementation/GUI_streamlit/images/hue_spektrum.jpg')
+        #st.image('/home/ralf/Documents/21_segementation/GUI_streamlit/images/hue_spektrum_short.jpg')
     with c2u:
         Sat_u = st.slider('Saturation upper bound:', 0, 179, 179)
 
-        
-    st.session_state.upper_bound = (Hue_u,Sat_u,179)
+    
+
+
+    st.session_state.upper_bound = (Hue_u,Sat_u,200)
 
     
     if img_rgb.shape[0]==1:
@@ -133,7 +146,7 @@ if upload_file:
         st.session_state.img_rgb = img_rgb
     
     lower_bound = st.session_state.get("lower_bound", (144, 27, 0))
-    upper_bound = st.session_state.get("upper_bound", (179, 179, 179))
+    upper_bound = st.session_state.get("upper_bound", (179, 179, 200))
     img_segm, num_tumor_pixel_01, perc_01 = segment_img( img_rgb , lower_bound, upper_bound)
 
     col1_img, col2_img = st.columns( [0.5, 0.5])
@@ -156,8 +169,7 @@ if upload_file:
     csv_name = st.text_input('Seclet name for results.csv file:', value="results.csv",  help='File should have .csv extension to be recognized by standard software.' ,  label_visibility="visible")
    
 
-st.divider()
-    
+
 
 replace_commas = st.session_state.get("replace_commas", None)    
 has_comma = st.session_state.get("commas", None)
@@ -176,12 +188,14 @@ if (has_comma==True):
 
 ######################################
 
-run = st.button('**Run calculation**' )
+
 
 placeholder = st.empty()
-if run: 
-    if upload_file:
-        
+did_run = st.session_state.get("did_run", None)  
+
+if upload_file:
+    run = st.button('**Run calculation**' )
+    if run:
         name_images_pairs = []
 
         # create output csv and write headings
@@ -204,7 +218,7 @@ if run:
                 if replace_commas:
                     img_name = img_name.replace(";", "_")
                     
-                lower_bound = st.session_state.get("lower_bound", (144, 27, 20))
+                lower_bound = st.session_state.get("lower_bound", (144, 27, 0))
                 upper_bound = st.session_state.get("upper_bound", (179, 255, 255))
                     
                 img_tmp = np.asarray(Image.open(upload_file[n]  ).convert('RGB'))
@@ -234,13 +248,12 @@ if run:
                 zip_file.writestr(image_name+".png", bytes_stream.getvalue())
             zip_file.writestr(csv_name, result_csv)
               
-    else:
-        st.write('No image files found. Load images first.')
+        st.session_state.did_run = True
 
     
-if run and upload_file:
+if st.session_state.get("did_run", None) and upload_file and run:
     st.success('Calculations finished. A csv-file has been created in your selected results folder.', icon="✅")
-    download = st.download_button('Download segmented images and results', zip_file_bytes_io, file_name='segmented_imgs_and_results.zip')  # Defaults to 'text/plain'
+    download = st.download_button('Download segmented images', zip_file_bytes_io, file_name='segmented_imgs_and_results.zip')  # Defaults to 'text/plain'
     
   
 
